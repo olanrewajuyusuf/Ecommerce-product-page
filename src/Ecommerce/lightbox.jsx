@@ -1,4 +1,4 @@
-import Sneakers from "./sneakers";
+// import Sneakers from "./sneakers";
 import Mini from "./miniProduct.jsx";
 import { IoClose } from "react-icons/io5";
 import { useState } from "react";
@@ -7,8 +7,9 @@ const closeStyles = {
   color: "white",
   fontSize: 30,
   margin: "-10px 0 20px 35vw",
+  cursor: "pointer",
 };
-function LightBox() {
+function LightBox({ product, handleMinus, handlePlus }) {
   const [closeModal, setCLoseModal] = useState(true);
   return (
     <>
@@ -21,7 +22,24 @@ function LightBox() {
             }}
           >
             <div className="lightbox" style={{ margin: "0px 0 0 5vw" }}>
-              <Sneakers />
+              <div className="sneakers">
+                <img src={product} alt="Sneakers" className="sneaker" />
+                <div className="next">
+                  <img
+                    src="images/icon-next.svg"
+                    alt="#"
+                    className="left"
+                    onClick={handleMinus}
+                  />
+                  <img
+                    src="images/icon-next.svg"
+                    alt="#"
+                    className="right"
+                    onClick={handlePlus}
+                  />
+                </div>
+              </div>
+              {/* <Sneakers /> */}
             </div>
             <div style={{ width: "70%", marginLeft: "10vw" }}>
               <Mini />

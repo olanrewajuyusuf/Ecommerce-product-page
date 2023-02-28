@@ -15,37 +15,37 @@ function Header(props) {
     }
   };
 
+  //navbar appearance
   useEffect(() => {
+    if (window.innerWidth >= 650) {
+      setMenu(true);
+    }
     window.addEventListener("resize", function () {
-      if (this.window.innerWidth <= 650) {
+      if (this.window.innerWidth >= 650) {
+        setMenu(true);
+      } else {
         setMenu(false);
       }
     });
     return () => {
       window.removeEventListener("resize", function () {
-        setMenu(false);
+        if (this.window.innerWidth >= 650) {
+          setMenu(true);
+        } else {
+          setMenu(false);
+        }
       });
     };
   }, []);
-  // let styles = {
-  //   visibility: menu <= 650 ? "hidden" : "unset",
-  // };
 
-  // const closeMenu = () => {
-  //   if (menu <= 650) {
-  //     return (styles.visibility = "hidden");
-  //   }
-  // };
-  // const openMenu = () => {
-  //   if (menu <= 650) {
-  //     return { visibility: "unset" };
-  //   }
-  // };
-  // window.addEventListener("resize", function () {
-  //   if (window.innerWidth <= 650) {
-  //     console.log("hello");
-  //   }
-  // });
+  //close navbar function
+  const closeMenu = () => {
+    setMenu(false);
+  };
+  //open navbar function
+  const openMenu = () => {
+    setMenu(true);
+  };
 
   //list items
   const lists = ["Collections", "Men", "Women", "About", "Contact"];
@@ -55,7 +55,7 @@ function Header(props) {
         <img
           src="images/icon-menu.svg"
           alt="#"
-          // onClick={() => setMenu(openMenu)}
+          onClick={() => setMenu(openMenu)}
           className="menu"
         />
         <img src="images/logo.svg" alt="logo" style={{ marginLeft: 15 }} />
@@ -67,7 +67,7 @@ function Header(props) {
                 alt="#"
                 className="menu-close"
                 style={{ marginBottom: 15 }}
-                onClick={() => setMenu(false)}
+                onClick={closeMenu}
               />
               {lists.map((list) => (
                 <li key={list}>
@@ -92,7 +92,13 @@ function Header(props) {
 
         <img src="images/image-avatar.png" alt="logo" className="avatar" />
       </div>
-      {cart && <Cart value={props.value} cartValue={props.cartValue} />}
+      {cart && (
+        <Cart
+          value={props.value}
+          cartValue={props.cartValue}
+          removeProduct={props.removeProduct}
+        />
+      )}
     </header>
   );
 }

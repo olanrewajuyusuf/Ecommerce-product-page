@@ -16,6 +16,11 @@ function Ecommerce() {
     }
   };
 
+  const removeProduct = () => {
+    setCartValue(false);
+    setValue(0);
+  };
+
   const handleChange = (e) => {
     setValue(e.target.value);
   };
@@ -32,7 +37,11 @@ function Ecommerce() {
 
   return (
     <div className="container">
-      <Header value={value} cartValue={cartValue} />
+      <Header
+        value={value}
+        cartValue={cartValue}
+        removeProduct={removeProduct}
+      />
       <MainPage
         value={value}
         handleChange={handleChange}

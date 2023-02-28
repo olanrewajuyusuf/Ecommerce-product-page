@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 // import { products } from "./products";
 
 function Sneakers({ handleClick, product, handlePlus, handleMinus }) {

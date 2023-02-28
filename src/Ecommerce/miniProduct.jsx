@@ -1,14 +1,36 @@
-import { lightBox } from "./products";
+import { light } from "./products";
+import { useEffect } from "react";
 
-function MiniProduct({ changeProduct }) {
+function MiniProduct({ changeProduct, border, miniStyle }) {
+  let over = document.getElementsByClassName("overlay");
+
+  // over.forEach((element) => {
+  //   element.addEventListener("mouseover", function () {
+  //     element.style.display = "block";
+  //   });
+  // });
+  for (let i = 0; i < over.length; i++) {
+    over[i].addEventListener("mouseover", function () {
+      over[i].style.display = "block";
+    });
+  }
+  useEffect(() => {}, [over]);
+
   return (
     <div className="mini-images">
-      {lightBox.map((image) => (
-        <div className="image-container" key={image}>
-          <img src={image} alt={image} onClick={changeProduct} />
-          <div className="overlay"></div>
-        </div>
-      ))}
+      {light.map((x) => {
+        const { image, id } = x;
+        return (
+          <div
+            className="image-container"
+            key={id}
+            onClick={() => changeProduct(id)}
+          >
+            <img src={image} alt={image} />
+            <div className="overlay"></div>
+          </div>
+        );
+      })}
     </div>
   );
 }
